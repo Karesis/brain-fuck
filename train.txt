@@ -1,0 +1,21 @@
+
+struct Node* nodes = malloc(sizeof(struct Node) * N);
+for (size_t i = 0; i < N; ++i) {
+    if (i == 0) {
+        nodes[i].prev = nullptr;
+    } else {
+        nodes[i].prev = nodes[i-1];
+    }
+    if (i == N - 1) {
+        nodes[i].next = nullptr;
+    } else {
+        nodes[i].next = nodes[i+1];
+    }
+}
+
+struct Node *left, *right;
+// 请填充代码，确保 A <-> B 连接正确
+left->cell->next = right->cell;
+right->cell->prev = left->cell;
+
+3.应该打印错误信息然后多尝试几次？
