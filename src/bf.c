@@ -2,6 +2,7 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,7 +10,7 @@
 struct Node {
 	struct Node* prev;
 	struct Node* next;
-	int data;
+	uint8_t data;
 };
 
 static struct Node TOMP = {.prev = nullptr, .next = nullptr, .data = INT_MAX};
@@ -168,7 +169,7 @@ bool tap_input(struct Tap* self)
 {
 	int c = getchar();
 	if (c != EOF)
-		self->cell->data = c;
+		self->cell->data = (uint8_t)c;
 	return true;
 }
 

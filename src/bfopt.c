@@ -10,7 +10,7 @@
 struct Node {
 	struct Node* prev;
 	struct Node* next;
-	int data;
+	uint8_t data;
 };
 
 static struct Node TOMP = {.prev = nullptr, .next = nullptr, .data = INT_MAX};
@@ -304,10 +304,10 @@ void tap_run(struct Tap* self, struct Program* prog)
 			}
 			break;
 		case OperationType_ADD_VAL:
-			self->cell->data += (int)instr.operand;
+			self->cell->data += (uint8_t)instr.operand;
 			break;
 		case OperationType_SUB_VAL:
-			self->cell->data -= (int)instr.operand;
+			self->cell->data -= (uint8_t)instr.operand;
 			break;
 		case OperationType_OUTPUT:
 			putchar(self->cell->data);
@@ -315,7 +315,7 @@ void tap_run(struct Tap* self, struct Program* prog)
 		case OperationType_INPUT: {
 			int c = getchar();
 			if (c != EOF)
-				self->cell->data = c;
+				self->cell->data = (uint8_t)c;
 			break;
 		}
 		case OperationType_JUMP_ZERO:
