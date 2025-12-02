@@ -13,7 +13,7 @@ struct Node {
 	uint8_t data;
 };
 
-static struct Node TOMP = {.prev = nullptr, .next = nullptr, .data = INT_MAX};
+static struct Node TOMP = {.prev = nullptr, .next = nullptr, .data = UINT8_MAX};
 
 bool node_is_tomp(struct Node* node)
 {
