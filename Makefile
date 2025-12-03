@@ -1,15 +1,20 @@
-.PHONY: clean build all
+CC := clang
+CFLAGS := -Wall -Wextra -O3 -march=native -std=c23
+SRC_DIR := src
+BUILD_DIR := build
 
-all: build build/bf build/bfopt
+SRCS := $(wildcard $(SRC_DIR)/*.c)
+TARGETS := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%, $(SRCS))
 
-build: 
-	@mkdir -p build 
+.PHONY: all clean
 
-build/bf: src/bf.c build 
-	clang -Wall -Wextra -O3 -std=c23 $< -o $@
+all: $(TARGETS)
 
-build/bfopt: src/bfopt.c build 
-	clang -Wall -Wextra -O3 -std=c23 $< -o $@
+$(BUILD_DIR)/%: $(SRC_DIR)/%.c | $(BUILD_DIR)
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
 clean:
-	rm -rf build
+	rm -rf $(BUILD_DIR)
